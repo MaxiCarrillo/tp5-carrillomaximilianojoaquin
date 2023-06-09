@@ -1,0 +1,198 @@
+<div class="container-fluid">
+    <div class="row mt-3 g-md-3">
+        <div class="col-12 col-md-8 d-none d-md-block">
+            <table class="table table-dark table-striped m-auto text-center">
+                <thead>
+                    <tr>
+                        <th colspan="6" class="text-center">Conversos de Divisas</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">
+                            <img src="../../../assets/imagenes/United_States.png" alt="" width="40" height="25"
+                                class="d-block m-auto">
+                            USD
+                        </th>
+                        <th scope="col">
+                            <img src="../../../assets/imagenes/Argentina.png" alt="" width="40" height="25"
+                                class="d-block m-auto">
+                            ARG
+                        </th>
+                        <th scope="col">
+                            <img src="../../../assets/imagenes/Flag_of_Europe.png" alt="" width="40" height="25"
+                                class="d-block m-auto">
+                            EUR
+                        </th>
+                        <th scope="col">
+                            <img src="../../../assets/imagenes/Flag_of_the_United_Kingdom.png" alt="" width="40"
+                                height="25" class="d-block m-auto">
+                            GPB
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            <img src="../../../assets/imagenes/United_States.png" alt="" width="40" height="25"
+                                class="d-block m-auto mt-4">
+                        </th>
+                        <th scope="row">
+                            <p>1 USD</p>
+                            <p>Inverse</p>
+                        </th>
+                        <th>
+                            <p>1.000000</p>
+                            <p>1.000000</p>
+                        </th>
+                        <th>
+                            <p>64.87725</p>
+                            <p>0.015414</p>
+                        </th>
+                        <th>
+                            <p>0.919901</p>
+                            <p>1.087074</p>
+                        </th>
+                        <th>
+                            <p>0.811469</p>
+                            <p>1.232332</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img src="../../../assets/imagenes/Flag_of_Europe.png" alt="" width="40" height="25"
+                                class="d-block m-auto mt-4">
+                        </th>
+                        <th scope="row">
+                            <p>1 EUR</p>
+                            <p>Inverse</p>
+                        </th>
+                        <th>
+                            <p>1.087074</p>
+                            <p>0.919901</p>
+                        </th>
+                        <th>
+                            <p>70.52637</p>
+                            <p>0.015414</p>
+                        </th>
+                        <th>
+                            <p>1.000000</p>
+                            <p>1.000000</p>
+                        </th>
+                        <th>
+                            <p>0.882127</p>
+                            <p>1.133623</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img src="../../../assets/imagenes/Flag_of_the_United_Kingdom.png" alt="" width="40"
+                                height="25" class="d-block m-auto mt-4">
+                        </th>
+                        <th scope="row">
+                            <p>1 GPB</p>
+                            <p>Inverse</p>
+                        </th>
+                        <th>
+                            <p>1.232332</p>
+                            <p>0.811469</p>
+                        </th>
+                        <th>
+                            <p>79.95034</p>
+                            <p>0.014179</p>
+                        </th>
+                        <th>
+                            <p>1.133623</p>
+                            <p>0.882127</p>
+                        </th>
+                        <th>
+                            <p>1.000000</p>
+                            <p>1.000000</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img src="../../../assets/imagenes/Flag_of_Russia.png" alt="" width="40" height="25"
+                                class="d-block m-auto mt-4">
+                        </th>
+                        <th scope="row">
+                            <p>1 RUB</p>
+                            <p>Inverse</p>
+                        </th>
+                        <th>
+                            <p>0.013226</p>
+                            <p>75.61134</p>
+                        </th>
+                        <th>
+                            <p>0.858036</p>
+                            <p>1.165452</p>
+                        </th>
+                        <th>
+                            <p>0.012166</p>
+                            <p>82.19511</p>
+                        </th>
+                        <th>
+                            <p>0.010732</p>
+                            <p>93.17830</p>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4">
+            <form class="mt-4 mb-4 me-2" #divisaFormulario="ngForm">
+                <h5 class="text-center">Comision de Divisas</h5>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Email</span>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="transaccion.emailCliente"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required #email="ngModel">
+                </div>
+                <div *ngIf="email.invalid" class="text-danger mb-3">
+                    <div *ngIf="email.errors?.['email']" class="text-danger">
+                        El correo electrónico ingresado no es válido.
+                    </div>
+                    <div *ngIf="email.errors?.['pattern']" class="text-danger">
+                        El correo electrónico ingresado no es válido.
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Cantidad</span>
+                    <input type="number" class="form-control" name="cantidad" [(ngModel)]="transaccion.cantidadOrigen"
+                        required min="1" #cant="ngModel">
+                </div>
+                <div class="text-danger mb-3">
+                    <div *ngIf="cant.errors?.['min']">
+                        El número debe ser mayor a 0.
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="select1">De</label>
+                    <select class="form-select" id="select1" name="de" [(ngModel)]="transaccion.monedaOrigen" required>
+                        <option *ngFor="let moneda of monedas" [value]="moneda.symbol">
+                            {{moneda.symbol}} {{moneda.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="select2">A</label>
+                    <select class="form-select" id="select2" name="a" [(ngModel)]="transaccion.monedaDestino" required>
+                        <option *ngFor="let moneda of monedas" [value]="moneda.symbol">
+                            {{moneda.symbol}} {{moneda.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="mt-3">
+                    <input type="text" class="form-control" value="{{ transaccion.cantidadDestino | currency:transaccion.monedaDestino:'symbol':'1.0-2' }}" readonly disabled>
+                </div>
+                <div class="d-grid gap-2 mt-3">
+                    <button type="button" class="btn btn-warning" [disabled]="divisaFormulario.invalid"
+                        (click)="cotizar()">Convertir
+                    </button>
+                    <a class="btn btn-primary" routerLink="/transaccion">Ver transacciones</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

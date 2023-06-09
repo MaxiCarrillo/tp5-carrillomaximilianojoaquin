@@ -1,0 +1,38 @@
+<div class="container mt-3 text-center">
+    <h3 class="text-center">Transacción</h3>
+    <div class="input-group m-auto mb-4" style="width: 300px;">
+        <input type="text" class="form-control" #filtro>
+        <button class="btn btn-outline-secondary" type="button" (click)="getTransaccionByMoneda(filtro.value)">Filtrar</button>
+        <button class="btn btn-outline-secondary" (click)="getTransacciones()" >Recuperar Todo</button>
+    </div>
+    <div *ngIf="transacciones.length==0" class="mt-3">
+        <h6 class="text-center text-muted">
+            No existen transacciones.
+        </h6>
+        <a routerLink="/divisa" class="btn btn-primary rounded-0">Crear transaccion</a>
+    </div>
+    <div *ngIf="transacciones.length!=0" class="mt-3">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Moneda Origen</th>
+                        <th scope="col">Cantidad Origen</th>
+                        <th scope="col">Moneda Destino</th>
+                        <th scope="col">Cantidad Destino</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of transacciones">
+                        <td>{{item.emailCliente}}</td>
+                        <td>{{item.monedaOrigen}}</td>
+                        <td>{{item.cantidadOrigen}}</td>
+                        <td>{{item.monedaDestino}}</td>
+                        <td>{{item.cantidadDestino | currency:item.monedaDestino:'symbol':'1.0-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

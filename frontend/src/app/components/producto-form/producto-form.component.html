@@ -1,0 +1,65 @@
+<div class="container">
+    <h3 class="m-3 text-center rounded-5 text-white" style="background-color: #ff4500;">Formulario Producto</h3>
+    <form #formulario="ngForm">
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="email" class="form-control" name="nombre" [(ngModel)]="producto.nombre" autocomplete="off"
+                required #nombre="ngModel">
+        </div>
+        <div *ngIf="nombre.invalid && nombre.dirty" class="text-danger mb-3">
+            <div *ngIf="nombre.errors?.['required']">
+                El Nombre es requerido.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Descripcion</label>
+            <textarea class="form-control" rows="3" name="descripcion" [(ngModel)]="producto.descripcion" required
+                #descripcion="ngModel"></textarea>
+        </div>
+        <div *ngIf="descripcion.invalid && descripcion.dirty" class="text-danger mb-3">
+            <div *ngIf="descripcion.errors?.['required']">
+                Debe indicar una descripcion.
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text">Imagen</label>
+            <input type="file" accept="image/*" class="form-control"
+                (change)="onFileSeleccionado($event)" required/>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <label class="form-label">Precio</label>
+                <input type="number" class="form-control" name="precio" [(ngModel)]="producto.precio" autocomplete="off"
+                    required #precio="ngModel" min="1">
+                <div *ngIf="precio.invalid && precio.dirty" class="text-danger mb-3">
+                    <div *ngIf="precio.errors?.['required']">
+                        Debe ingresar el precio del producto.
+                    </div>
+                    <div *ngIf="precio.errors?.['min']">
+                        El precio del producto no puede ser negativo o nulo.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label class="form-label">Stock</label>
+                <input type="number" class="form-control" name="stock" [(ngModel)]="producto.stock" autocomplete="off"
+                    required #stock="ngModel" min="1">
+                    <div *ngIf="stock.invalid && stock.dirty" class="text-danger mb-3">
+                        <div *ngIf="stock.errors?.['required']">
+                            Debe ingresar el stock del producto.
+                        </div>
+                        <div *ngIf="stock.errors?.['min']">
+                            El stock del prodcuto no puede ser negativo o nulo.
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="destacado" [(ngModel)]="producto.destacado">
+            <label class="form-check-label">Destacado</label>
+        </div>
+        <button class="btn text-white" style="background-color: #ff4500;" (click)="crearProducto()"
+            [disabled]="formulario.invalid" routerLink="/producto">Registrar</button>
+        <a routerLink="/producto" class="btn ms-3" style="border-color: #ff4500; color: #ff4500;">Volver</a>
+    </form>
+</div>

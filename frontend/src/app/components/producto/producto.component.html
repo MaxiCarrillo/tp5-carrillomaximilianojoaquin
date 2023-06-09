@@ -1,0 +1,31 @@
+<div class="container" *ngIf="productos">
+    <div *ngIf="productos.length != 0">
+        <h3 class="m-3 text-center rounded-5 text-white" style="background-color: #ff4500;">Productos Destacados</h3>
+        <div class="text-center">
+            <a class="btn mb-3 text-white rounded-0" style="background-color: #ff4500;" routerLink="/producto-form/0">
+                Crear Producto
+            </a>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" *ngFor="let producto of productos">
+                <div class="card h-100">
+                    <div class="card-header text-center">{{producto.nombre }}</div>
+                    <img [src]="producto.imagen" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{producto.precio | currency:'ARS ':'symbol':'1.0-2'}}</h5>
+                        <p class="card-text">{{producto.descripcion}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">Cantidad disponible: {{producto.stock }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="productos.length == 0" class="text-center">
+        <h3 class="m-3" style="color: #ff4500;">No existen productos registrados.</h3>
+        <a class="btn mb-3" style="border-color: #ff4500; color: #ff4500;" routerLink="/producto-form/0">
+            Registrar Producto
+        </a>
+    </div>
+</div>
