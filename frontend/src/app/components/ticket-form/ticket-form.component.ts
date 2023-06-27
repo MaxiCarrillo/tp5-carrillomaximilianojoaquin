@@ -14,6 +14,7 @@ export class TicketFormComponent {
   accion!: string;
   ticket!: Ticket;
   espectadores!: Array<any>;
+  precioReal!:number;
 
   constructor(private ticketService: TicketService, private rutaActiva: ActivatedRoute) {
     this.getEspectadores();
@@ -52,6 +53,7 @@ export class TicketFormComponent {
       result => {
         this.ticket = new Ticket();
         Object.assign(this.ticket, result);
+        this.precioReal = result.precioTicket;
       },
       error => {
         console.log(error);
@@ -80,6 +82,15 @@ export class TicketFormComponent {
         console.log(error);
       }
     );
+  }
+
+  calcularPrecio() {
+    if(this.ticket.categoriaEspectador=="Local"){
+      this.ticket.precioTicket = this.precioReal - (this.precioReal * 0, 20);
+    }else{
+      this.ticket.precioTicket = this.precioReal;
+    }
+    
   }
 
 }

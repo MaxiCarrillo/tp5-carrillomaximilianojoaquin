@@ -4,20 +4,21 @@
         <input class="form-control" name="id" [(ngModel)]="ticket._id" disabled hidden>
         <div class="mb-3">
             <label class="form-label">Precio</label>
-            <input type="number" class="form-control" name="precio" [(ngModel)]="ticket.precioTicket" autocomplete="off"
-                required #precio="ngModel" min="1">
+            <input type="number" class="form-control" name="precio" [(ngModel)]="precioReal" autocomplete="off"
+                required #precio="ngModel" min="25" (ngModelChange)="calcularPrecio()">
             <div *ngIf="precio.invalid && precio.dirty" class="text-danger mb-3">
                 <div *ngIf="precio.errors?.['required']">
                     Debe ingresar el precio del ticket.
                 </div>
                 <div *ngIf="precio.errors?.['min']">
-                    El precio del ticket no puede ser negativo o nulo.
+                    El precio del ticket debe ser mayor a $25.
                 </div>
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Tipo de Espectador</label>
-            <select name="categoriaEspectador" [(ngModel)]="ticket.categoriaEspectador" class="form-select" required #categoriaEspectador="ngModel">
+            <select name="categoriaEspectador" [(ngModel)]="ticket.categoriaEspectador" class="form-select" required
+                #categoriaEspectador="ngModel" (ngModelChange)="calcularPrecio()">
                 <option value="Local">Local</option>
                 <option value="Extranjero">Extranjero</option>
             </select>
@@ -29,7 +30,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Espectador</label>
-            <select class="form-select" name="espectador" [(ngModel)]="ticket.espectador" required #espectador="ngModel">
+            <select class="form-select" name="espectador" [(ngModel)]="ticket.espectador" required
+                #espectador="ngModel">
                 <option [value]="espectador._id" *ngFor="let espectador of espectadores">{{espectador.nombre}}
                     {{espectador.apellido}}, {{espectador.dni}}</option>
             </select>
@@ -39,11 +41,14 @@
                 </div>
             </div>
         </div>
-        <button type="button" *ngIf="accion=='new'" class="btn btn-outline-primary" 
-            [disabled]="formulario.invalid" 
+        <div class="mb-3"
+            *ngIf="precioReal!=null&&(ticket.categoriaEspectador=='Local' || ticket.categoriaEspectador=='Extranjero')">
+            <label>Precio</label>
+            <b> ${{ticket.precioTicket}}</b>
+        </div>
+        <button type="button" *ngIf="accion=='new'" class="btn btn-primary" [disabled]="formulario.invalid"
             (click)="venderTicket()" routerLink="/tickets">Vender</button>
-        <button type="button" *ngIf="accion=='update'" class="btn btn-outline-warning" 
-            [disabled]="formulario.invalid" 
+        <button type="button" *ngIf="accion=='update'" class="btn btn-warning" [disabled]="formulario.invalid"
             (click)="modificarTicket()" routerLink="/tickets">Modificar</button>
         <a class="btn btn-outline-dark ms-1" routerLink="/tickets">Volver</a>
     </form>
