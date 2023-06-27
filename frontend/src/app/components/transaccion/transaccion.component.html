@@ -21,15 +21,17 @@
                         <th scope="col">Cantidad Origen</th>
                         <th scope="col">Moneda Destino</th>
                         <th scope="col">Cantidad Destino</th>
+                        <th scope="col">Tasa de Conversion</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of transacciones">
                         <td>{{item.emailCliente}}</td>
                         <td>{{item.monedaOrigen}}</td>
-                        <td>{{item.cantidadOrigen}}</td>
+                        <td>{{item.cantidadOrigen | currency:item.monedaOrigen:'symbol':'1.0-2' }}</td>
                         <td>{{item.monedaDestino}}</td>
                         <td>{{item.cantidadDestino | currency:item.monedaDestino:'symbol':'1.0-2' }}</td>
+                        <td>{{item.tasaConversion}}</td>
                     </tr>
                 </tbody>
             </table>
